@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+import { UserProvider, useUser } from './context/UserContext';
+import ChatPage from './pages/ChatPage';
+
+// Separate the Routes logic
+function AppRoutes() {
+  const { user } = useUser();
+
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={user ? <Navigate to="/home" /> : <LoginPage />}
+      />
+      <Route
+        path="/home"
+        element={user ? <HomePage /> : <Navigate to="/" />}
+      />
+
+      <Route path="/chat/:id" element={<ChatPage />} />
+    </Routes>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </UserProvider>
   );
 }
 

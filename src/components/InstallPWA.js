@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react';
+import './InstallPWA.css';
+import waveImage from "../assets/images/icon/qcicon.png"
+
 
 function InstallPWA() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [installStatus, setInstallStatus] = useState('');
 
   useEffect(() => {
-    window.addEventListener('beforeinstallprompt', (e) => {
+    const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
-    });
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+    };
   }, []);
 
   const handleInstallClick = () => {
@@ -15,34 +24,34 @@ function InstallPWA() {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
+          setInstallStatus('App installed successfully!');
         } else {
-          console.log('User dismissed the install prompt');
+          setInstallStatus('App installation was dismissed.');
         }
         setDeferredPrompt(null);
+
+        setTimeout(() => {
+          setInstallStatus('');
+        }, 2500);
       });
     }
   };
 
   return (
-    deferredPrompt && (
-      <button
-        onClick={handleInstallClick}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          padding: '10px 20px',
-          background: '#1976d2',
-          color: '#fff',
-          borderRadius: '10px',
-          border: 'none',
-          cursor: 'pointer'
-        }}
-      >
-        Install App
-      </button>
-    )
+    <div>
+      {deferredPrompt && (
+        <button onClick={handleInstallClick} className="install-btn animate-slide-in">
+          <img src={waveImage} alt="Install Prompt" className="install-img" />
+          Install App
+        </button>
+      )}
+
+      {installStatus && (
+        <div className="install-toast animate-toast">
+          {installStatus}
+        </div>
+      )}
+    </div>
   );
 }
 

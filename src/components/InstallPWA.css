@@ -1,0 +1,98 @@
+/* Main install button styling */
+.install-btn {
+    position: fixed;
+    bottom: 4rem;
+    right: 1.5rem;
+    z-index: 50;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, #34d399, #10b981, #059669);
+    color: white;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    animation: slideInRight 0.5s ease-out;
+  }
+  
+  /* Hover effect */
+  .install-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(to right, #10b981, #059669, #047857);
+  }
+  
+  /* Image inside button with bounce */
+  .install-img {
+    width: 24px;
+    height: 24px;
+    animation: zoomInOut 1.5s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+  
+  
+  /* Slide in from right to left */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slideInRight 0.5s ease-out;
+  }
+  
+ /* Zoom in / out animation for image */
+@keyframes zoomInOut {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+  }
+  
+  
+  /* Toast message styling */
+  .install-toast {
+    position: fixed;
+    bottom: 6.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f2937;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: toastSlideInOut 2.5s ease forwards;
+  }
+  
+  /* Toast slide in and out */
+  @keyframes toastSlideInOut {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+    }
+    10%, 80% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+    }
+  }
+  
+  .animate-toast {
+    animation: toastSlideInOut 2.5s ease;
+  }
+  

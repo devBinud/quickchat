@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage';
 import { UserProvider, useUser } from './context/UserContext';
 import ChatPage from './pages/ChatPage';
 
-// Separate the Routes logic
 function AppRoutes() {
   const { user } = useUser();
 
@@ -19,7 +18,6 @@ function AppRoutes() {
         path="/home"
         element={user ? <HomePage /> : <Navigate to="/" />}
       />
-
       <Route path="/chat/:id" element={<ChatPage />} />
     </Routes>
   );

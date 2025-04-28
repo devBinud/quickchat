@@ -227,8 +227,8 @@ function HomePage() {
 
                 {/* Message Count */}
                 <div className="ml-4">
-                  <div className="bg-green-500 text-white text-xs font-bold w-3 h-3 rounded-full flex items-center justify-center">
-                    {/* <p>Dynamic unread message</p> */}
+                  <div className="bg-green-500 text-white text-xs font-bold w-14 h-5 rounded-full flex items-center justify-center">
+                    <p>Online</p>
                   </div>
                 </div>
               </div>
